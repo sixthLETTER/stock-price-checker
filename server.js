@@ -13,6 +13,7 @@ const app = express();
 
 // Content Security Policy - only allow scripts and CSS from this server
 app.use(helmet.contentSecurityPolicy({
+  useDefaults: false,
   directives: {
     defaultSrc: ["'self'"],
     scriptSrc: ["'self'"],
