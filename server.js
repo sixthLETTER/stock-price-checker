@@ -12,14 +12,10 @@ const runner            = require('./test-runner');
 const app = express();
 
 // Content Security Policy - only allow scripts and CSS from this server
-app.use(helmet.contentSecurityPolicy({
-  useDefaults: false,
-  directives: {
-    defaultSrc: ["'self'"],
-    scriptSrc: ["'self'"],
-    styleSrc: ["'self'"]
-  }
-}));
+app.use(function(req, res, next) {
+  res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self'");
+  next();
+});
 
 app.use('/public', express.static(process.cwd() + '/public'));
 
